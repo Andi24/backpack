@@ -18,6 +18,7 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
 
 import '../packages/bpk-stylesheets/base';
 import '../packages/bpk-stylesheets/base.css';
@@ -33,6 +34,7 @@ import themeableAttributes from './themeableAttributes';
 
 const EnhancedThemeProvider = updateOnThemeChange(BpkThemeProvider);
 
+addDecorator(withA11y);
 addDecorator(withKnobs);
 addDecorator(story => (
   <div style={{ padding: TOKENS.spacingBase }}>
