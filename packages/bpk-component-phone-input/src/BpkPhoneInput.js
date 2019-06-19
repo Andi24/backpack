@@ -25,7 +25,7 @@ import BpkInput, { INPUT_TYPES } from 'bpk-component-input';
 import BpkLabel from 'bpk-component-label';
 import BpkSelect from 'bpk-component-select';
 
-import STYLES from './BpkPhoneInput.css';
+import STYLES from './BpkPhoneInput.scss';
 
 const getClassName = cssModules(STYLES);
 
@@ -101,30 +101,26 @@ const BpkPhoneInput = (props: Props) => {
     disabled: !!disabled,
   };
 
-  const dialingCodeText = dialingCodes.find(
-    dialCodeItem => dialCodeItem.code === dialingCode,
-  ).dialingCode;
-
   let phoneDisplayValue;
 
   if (countryCodeMask) {
     if (value.startsWith('+')) {
-      if (value.startsWith(`+${dialingCodeText} `)) {
+      if (value.startsWith(`+${dialingCode} `)) {
         phoneDisplayValue = value;
-      } else if (value.charAt(`+${dialingCodeText}`.length) !== ' ') {
-        const phoneNumber = value.slice(`+${dialingCodeText}`.length);
-        phoneDisplayValue = `+${dialingCodeText} ${phoneNumber}`;
+      } else if (value.charAt(`+${dialingCode}`.length) !== ' ') {
+        const phoneNumber = value.slice(`+${dialingCode}`.length);
+        phoneDisplayValue = `+${dialingCode} ${phoneNumber}`;
       } else {
         const phoneValue = value.split(' ')[1];
 
         phoneDisplayValue = phoneValue
-          ? `+${dialingCodeText} ${phoneValue}`
-          : `+${dialingCodeText} `;
+          ? `+${dialingCode} ${phoneValue}`
+          : `+${dialingCode} `;
       }
-    } else if (value.includes(dialingCodeText)) {
+    } else if (value.includes(dialingCode)) {
       phoneDisplayValue = `+${value}`;
     } else {
-      phoneDisplayValue = `+${dialingCodeText} ${value}`;
+      phoneDisplayValue = `+${dialingCode} ${value}`;
     }
   } else {
     phoneDisplayValue = value;
